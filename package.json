@@ -1,0 +1,21 @@
+{
+  "name": "loxberry-scripthub",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "release:major": "node .github/release.js major false",
+    "release:minor": "node .github/release.js minor false",
+    "release:patch": "node .github/release.js patch false",
+    "pre:major": "node .github/release.js major true",
+    "pre:minor": "node .github/release.js minor true",
+    "pre:patch": "node .github/release.js patch true"
+  },
+  "author": "Benoît Waeghe",
+  "license": "APACHE 2.0",
+  "devDependencies": {
+    "generate-changelog": "1.8.0",
+    "prompts": "2.4.2",
+    "read-ini-file": "3.0.1",
+    "write-ini-file": "3.0.2"
+  }
+}
