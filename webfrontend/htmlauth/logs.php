@@ -18,7 +18,7 @@ LBWeb::lbheader($template_title, $helplink, $helptemplate);
 
 // Define log file
 $log_dir = "/opt/loxberry/data/plugins/scripthub/";
-$log_filename = "output.txt";
+$log_filename = "scripthub_cron.log";
 $log_path = realpath($log_dir . $log_filename);
 
 // Validate file exists and is within log_dir
@@ -126,3 +126,4 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     exit;
 }
 ?>
+<?php
