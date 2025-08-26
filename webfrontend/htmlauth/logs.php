@@ -8,9 +8,9 @@ $helplink = "http://www.loxwiki.eu:80/x/2wzL";
 $helptemplate = "help.html";
 
 // Navigation
-$navbar[1]['Name'] = 'ScriptHub';
+$navbar[1]['Name'] = 'Overzicht';
 $navbar[1]['URL'] = 'index.php';
-$navbar[2]['Name'] = 'Logfile';
+$navbar[2]['Name'] = 'Logs';
 $navbar[2]['URL'] = 'logs.php';
 $navbar[2]['active'] = True;
 

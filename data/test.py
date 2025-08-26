@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+import time
 
-file_path = "/opt/loxberry/data/plugins/scripthub/output.txt"
+file_path = "/opt/loxberry/data/plugins/scripthub/scripthub_cron.log"
 
-with open(file_path, "w") as f:
-    f.write("Hello, this is a test file.\n")
+for i in range(10):
+    with open(file_path, "a") as f:
+        f.write(f"[test.py] Hello, this is a test. Iteration {i}\n")
+    time.sleep(5)  # stay alive for ~50 seconds
