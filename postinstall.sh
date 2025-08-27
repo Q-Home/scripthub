@@ -45,6 +45,7 @@ PSBIN=$LBPSBIN/$PDIR
 PBIN=$LBPBIN/$PDIR
 
 # your code goes here
+chmod +x $PDATA/test.py
 
 # Exit with Status 0
 exit 0
