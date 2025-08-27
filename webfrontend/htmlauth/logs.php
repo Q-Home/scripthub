@@ -13,6 +13,8 @@ $navbar[1]['URL'] = 'index.php';
 $navbar[2]['Name'] = 'Logs';
 $navbar[2]['URL'] = 'logs.php';
 $navbar[2]['active'] = True;
+$navbar[3]['Name'] = 'Settings';
+$navbar[3]['URL'] = 'settings.php';
 
 LBWeb::lbheader($template_title, $helplink, $helptemplate);
 
