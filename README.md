@@ -10,7 +10,6 @@ Browse your scripts, view/edit safely, run them manually (nohup), or schedule th
 - [Scripthub (LoxBerry Plugin)](#scripthub-loxberry-plugin)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
-  - [Screenshots](#screenshots)
   - [Installation](#installation)
   - [Defaults](#defaults)
   - [Usage](#usage)
@@ -63,16 +62,6 @@ Browse your scripts, view/edit safely, run them manually (nohup), or schedule th
   * Path validation prevents editing outside the script directory.
   * File updates create timestamped backups: `<script>.YYYYMMDD_HHMMSS.bkp`.
   * Configurable **cron user** (default `loxberry`).
-
-## Screenshots
-
-> Replace with your own screenshots in `docs/`.
-
-```md
-![Overview](docs/overview.png)
-![Cron](docs/cron.png)
-![Settings](docs/settings.png)
-```
 
 ## Installation
 
