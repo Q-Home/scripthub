@@ -1,6 +1,13 @@
 <?php
 require_once "loxberry_web.php";
 require_once "loxberry_system.php";
+require_once "settings.inc.php";
+$settings = sh_settings_load($settingsFile, $dataDir);
+
+$scriptDir = $settings['paths']['script_dir'];
+$logfile   = $settings['paths']['log_file'];
+$lockDir   = $settings['paths']['lock_dir'];
+
 
 $L = LBSystem::readlanguage("language.ini");
 $template_title = "Plugin Logs";
@@ -16,12 +23,49 @@ $navbar[2]['active'] = True;
 $navbar[3]['Name'] = 'Settings';
 $navbar[3]['URL'] = 'settings.php';
 
-LBWeb::lbheader($template_title, $helplink, $helptemplate);
+
 
 // Define log file
-$log_dir = "/opt/loxberry/data/plugins/scripthub/";
-$log_filename = "scripthub_cron.log";
-$log_path = realpath($log_dir . $log_filename);
+// Define log file (from Settings)
+$log_path = $logfile;                // comes from settings.inc.php
+$log_dir  = dirname($log_path);
+
+// Ensure the file exists (so the viewer doesn’t 404 on a first run)
+if (!file_exists($log_path)) {
+    @touch($log_path);
+    @chmod($log_path, 0666);
+}
+
+// Validate file exists and is within its parent dir
+$rp_file = realpath($log_path);
+$rp_dir  = realpath($log_dir);
+$valid   = ($rp_file !== false && $rp_dir !== false && strpos($rp_file, $rp_dir) === 0 && is_readable($rp_file));
+
+$log_lines = [];
+if ($valid) {
+    // Read newest 500 lines (newest first)
+    $lines = @file($rp_file, FILE_IGNORE_NEW_LINES);
+    if ($lines === false) { $lines = []; }
+    $log_lines = array_reverse(array_slice($lines, -500));
+}
+
+// AJAX: return just the log lines
+if (isset($_GET['ajax']) && $_GET['ajax'] == '1') {
+    if ($valid) {
+        foreach ($log_lines as $line) {
+            $logClass = 'log-info';
+            if (stripos($line, '[error]') !== false)       $logClass = 'log-error';
+            elseif (stripos($line, '[warning]') !== false) $logClass = 'log-warning';
+            echo '<div class="' . $logClass . '">' . htmlspecialchars(trim($line)) . '</div>';
+        }
+    } else {
+        echo '<div class="text-danger">Log file not found or invalid.</div>';
+    }
+    exit;
+}
+
+
+LBWeb::lbheader($template_title, $helplink, $helptemplate);
 
 // Validate file exists and is within log_dir
 $valid = ($log_path && strpos($log_path, realpath($log_dir)) === 0 && file_exists($log_path));
